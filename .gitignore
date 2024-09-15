@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 dist-ssr
+.vite/
 downloads/
 eggs/
 .eggs/
