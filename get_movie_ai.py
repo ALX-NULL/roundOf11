@@ -21,7 +21,7 @@ def __format_prompt__(user_request: str) -> str:
 
 	only the Title should be in the format: "Title:".
 	only movies not documentaries.
-	maximum 10 movies.
+	maximum 5 movies.
 	"""
     return prompt
 
