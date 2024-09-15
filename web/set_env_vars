@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Set environment variables
+export API_KEY=AIzaSyAdZN0cOn3hiWjaMKoP4yW24gwGtTyV6E0
+export MOVIE_API_KEY=2ca6fbddea69e9163ed02208114259c9
