@@ -1,5 +1,7 @@
-import { LoaderFunction, useLoaderData, redirect } from "react-router-dom";
+import { LoaderFunction, useLoaderData } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
+import { useState } from "react";
+import Spinner from "./Spinner";
 
 interface Task {
   title: string;
@@ -27,12 +29,19 @@ export const loader: LoaderFunction = async function loader(o) {
 
 export default function TopicPage() {
   const topic = useLoaderData() as Topic;
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [spining, setSpining] = useState(false);
+
+  const getTasks = () => {
+    setSpining(true);
+    setTasks([]);
+  };
 
   if (!topic.title) return <NotFoundPage />;
   return (
-    <article className="prose dark:prose-invert px-4 py-8">
+    <article className="mx-auto prose dark:prose-invert px-4 py-8">
       <h1 className="">{topic.title}</h1>
-      <p className="space-x-4 flex">{topic.flags?.map((o)=> <span key={o} className="dark:bg-cyan-200 bg-red-500 dark:text-gray-800 text-white font-semibold py-1 px-3 rounded-lg text-nowrap">{o}</span>)}</p>
+      <p className="gap-3 flex flex-wrap">{topic.flags?.map((o)=> <span key={o} className="dark:bg-cyan-200 bg-red-500 dark:text-gray-800 text-white font-semibold py-1 px-3 rounded-lg text-nowrap">{o}</span>)}</p>
       <hr  className="mt-0"/>
       <h2>Short Introduction</h2>
       <p>{topic.introduction}</p>
@@ -41,7 +50,16 @@ export default function TopicPage() {
       <h2>Learning Objectives</h2>
       <p>{topic.learning_objectives?.map((o) => <li key={o}>{o}</li>)}</p>
       <div className="flex my-8">
-      <button className="bg-red-500 dark:bg-cyan-200 dark:text-gray-800 mx-auto py-2 px-4 rounded-xl text-xl font-semibold">Check your knowledge</button>
+      { tasks.length > 0 &&
+      <>
+      <hr />
+      <h2>Tasks</h2>
+      {tasks.map((task) => <div>{task.title}</div>)}
+      </>
+      }
+      <button disabled={spining} onClick={getTasks} className="bg-red-500 min-w-96 text-center dark:bg-cyan-200 dark:text-gray-800 mx-auto py-3 px-4 rounded-xl text-xl font-semibold hover:opacity-90 disabled:opacity-80">
+      {spining? <div className="flex space-x-4 items-center justify-center"><Spinner /> <span>Getting some questions...</span></div> : "Check your knowledge" }
+      </button>
       </div>
     </article>
   );
