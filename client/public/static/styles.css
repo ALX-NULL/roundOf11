@@ -85,3 +85,16 @@ footer {
 	left: 50%;
 }
 
+.error-container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	background-color: #141414;
+	color: white;
+}
+
+.error h1{
+	font-size: 200px;
+}
