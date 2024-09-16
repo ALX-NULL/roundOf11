@@ -1,4 +1,5 @@
 import { LoaderFunction, useLoaderData, redirect } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
 
 interface Task {
   title: string;
@@ -16,16 +17,23 @@ interface Topic {
 }
 
 
-export const loader: LoaderFunction = async function loader({ request }) {
-  const q = new URLSearchParams(request.url.split('?')[1]).get("q");
-  const res = await fetch(`http://localhost:8000/api/v1/get_ai_content?query=${q}`);
+
+export const loader: LoaderFunction = async function loader(o) {
+  const q = new URLSearchParams(o.request.url.split('?')[1]).get("q");
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), 200000);
+  const res = await fetch(`http://localhost:8000/api/v1/get_ai_content?query=${q}`, {
+    signal: controller.signal
+  });
+  clearTimeout(id);
   if (res.status == 200) return await res.json() as Topic;
-  else return {};
+  else return await loader(o);
 }
 
 export default function TopicPage() {
   const topic = useLoaderData() as Topic;
 
+  if (!topic.title) return <NotFoundPage />;
   return (
     <article className="prose dark:prose-invert px-4 py-8">
       <h1 className="">{topic.title}</h1>

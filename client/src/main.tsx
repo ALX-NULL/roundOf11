@@ -4,9 +4,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './HomePage.tsx';
 import TopicPage, { loader } from './TopicPage.tsx';
 import './index.css'
+import NotFoundPage from './NotFoundPage.tsx';
 
 const router = createBrowserRouter([
-  {path: '/', element: <HomePage />},
+  {path: '/', element: <HomePage />, errorElement: <NotFoundPage />},
   {path: '/topic', element: <TopicPage />, loader: loader}
 ]);
 
