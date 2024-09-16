@@ -6,7 +6,7 @@ from difflib import SequenceMatcher
 import get_json_ai as AI
 from get_movie_ai import get_movies_list
 from get_movies_db import get_movies_list as movies_from_db
-
+from generate_quiz import generate_quiz_ai
 app = FastAPI()
 
 # Redis Configuration
@@ -82,10 +82,20 @@ async def get_movies(query: str, response: Response) -> Dict:
 	dict_movies = {}
 
 	for movie in movies:
-		dict_movies[movie] = movies_from_db(movie)		
+		dict_movies[movie] = movies_from_db(movie)
 	if dict_movies:
 		# Cache the new query and response for 3 hours
 		await cache_response(query, dict_movies, namespace)
 		return dict_movies
 	else:
 		return {"error": "No movies found for the given query."}
+
+
+@app.get('/api/v1/quiz')
+def generate_quiz(topic: str, learning_objectives: str) -> Dict:
+	"""Generate a quiz based on the provided topic and learning objectives."""
+	# Use the AI model to generate a quiz
+	quiz_generator = generate_quiz_ai(topic,
+									  learning_objectives,
+									  num_questions=10)
+	return quiz_generator
