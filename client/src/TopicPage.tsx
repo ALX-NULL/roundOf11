@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { LoaderFunction, useLoaderData, redirect } from "react-router-dom";
 
 interface Task {
   title: string;
@@ -17,30 +16,27 @@ interface Topic {
 }
 
 
+export const loader: LoaderFunction = async function loader({ request }) {
+  const q = new URLSearchParams(request.url.split('?')[1]).get("q");
+  const res = await fetch(`http://localhost:8000/api/v1/get_ai_content?query=${q}`);
+  if (res.status == 200) return await res.json() as Topic;
+  else return {};
+}
 
 export default function TopicPage() {
-  const location = useLocation();
-  const [topic, setTopic] = useState<Topic>({});
-  useEffect(() => {
-    const q = new URLSearchParams(location.search).get("q");
-    (async function() {
-      const res = await fetch(`http://localhost:8000/api/v1/get_ai_content?query=${q}`);
-      if (res.ok) setTopic(await res.json() as Topic);
-    })()
-  }, [location])
+  const topic = useLoaderData() as Topic;
 
   return (
-    <article className="prose">
-      <h1>{topic.title}</h1>
-      <p>{topic.flags?.map((f)=> <span className="bg-red-500">{f}</span>)}</p>
-      <hr />
+    <article className="prose dark:prose-invert px-4 py-8">
+      <h1 className="">{topic.title}</h1>
+      <p className="space-x-4 flex">{topic.flags?.map((o)=> <span key={o} className="dark:bg-cyan-200 bg-red-500 dark:text-gray-800 text-white font-semibold py-1 px-3 rounded-lg text-nowrap">{o}</span>)}</p>
+      <hr  className="mt-0"/>
       <h2>Short Introduction</h2>
       <p>{topic.introduction}</p>
       <h2>Resources</h2>
-      <ul>{topic.resources?.map((o) => <a href={o.url}><li>{o.title}</li></a>)}</ul>
+      <ul>{topic.resources?.map((o) => <a href={o.url} key={o.title} className="dark:text-cyan-300 text-red-700 font-semibold"><li>{o.title}</li></a>)}</ul>
       <h2>Learning Objectives</h2>
-      <p>You need to be able to answer these questions without the help of google to make sure you understand well</p>
-      <p>{topic.learning_objectives?.map((o) => <li>{o}</li>)}</p>
+      <p>{topic.learning_objectives?.map((o) => <li key={o}>{o}</li>)}</p>
     </article>
   );
 }

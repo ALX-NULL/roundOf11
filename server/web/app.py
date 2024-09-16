@@ -9,7 +9,7 @@ from get_movies_db import get_movies_list as movies_from_db
 from generate_quiz import generate_quiz_ai
 app = FastAPI()
 
-app.add_middleware(CORSMiddleware, allow_origins=['*'])
+app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['*'], allow_headers=['*'])
 
 # Redis Configuration
 redis_client = redis.Redis(host='localhost', port=6379)

@@ -1,6 +1,13 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigation } from "react-router-dom";
+import LoadingPage from "./LoadingPage";
 
 export default function HomePage() {
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") {
+    return <LoadingPage />
+  }
+
   return (
     <Form className="mx-auto flex flex-col items-center justify-center w-full p-8" action="/topic">
     <div className="text-red-500 dark:text-teal-400 text-4xl font-serif flex-col flex">
