@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Set environment variables
+export API_KEY=AIzaSyAdZN0cOn3hiWjaMKoP4yW24gwGtTyV6E0
+export MOVIES_API_KEY='Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2E2ZmJkZGVhNjllOTE2M2VkMDIyMDgxMTQyNTljOSIsIm5iZiI6MTcyNjQxMzY3My42ODAyODUsInN1YiI6IjY2ZTVjOGZhOWRmYmJkZjBlNmNmMWU4YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Di5V4nCJmKqnHz3xhz4EdWubVGxFnjUnKuyEHKVW1t4'
