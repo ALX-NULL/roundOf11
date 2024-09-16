@@ -1,6 +1,8 @@
+import { Form } from "react-router-dom";
+
 export default function HomePage() {
   return (
-    <form className="mx-auto flex flex-col items-center justify-center w-full p-8" action="">
+    <Form className="mx-auto flex flex-col items-center justify-center w-full p-8" action="/topic">
     <div className="text-red-500 dark:text-teal-400 text-4xl font-serif flex-col flex">
     <span>I want to</span>
     <h1 className="bg-gradient-to-bl from-red-600 dark:from-teal-700 to-rose-400 dark:to-teal-200 bg-clip-text text-transparent text-9xl">LEARN</h1>
@@ -9,6 +11,6 @@ export default function HomePage() {
     NOW!
     </button>
     </div>
-    </form>
+    </Form>
   );
 }
