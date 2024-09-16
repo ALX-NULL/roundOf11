@@ -98,5 +98,5 @@ def generate_quiz(topic: str, learning_objectives: str) -> Dict:
 	# Use the AI model to generate a quiz
 	quiz_generator = generate_quiz_ai(topic,
 									  learning_objectives,
-									  num_questions=10)
+									  num_questions=5)
 	return quiz_generator
