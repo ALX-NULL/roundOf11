@@ -1,6 +1,7 @@
 import json
 import redis.asyncio as redis
 from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Optional
 from difflib import SequenceMatcher
 import get_json_ai as AI
@@ -8,6 +9,8 @@ from get_movie_ai import get_movies_list
 from get_movies_db import get_movies_list as movies_from_db
 
 app = FastAPI()
+
+app.add_middleware(CORSMiddleware, allow_origins=['*'])
 
 # Redis Configuration
 redis_client = redis.Redis(host='localhost', port=6379)
