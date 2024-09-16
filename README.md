@@ -1,10 +1,9 @@
-# Quiz.ai
-
-**Quiz.ai** is an AI-powered platform designed to automatically generate and assess quizzes, streamlining the process of creating and evaluating assessments. The platform offers advanced features to enhance both teaching and learning experiences, providing instant feedback and integrating seamlessly with Learning Management Systems (LMS).
+# ALX Learning Bot
+An AI powered platform designed to automatically generate and assess quizzes, streamlining the process of creating and evaluating assessments. The platform offers advanced features to enhance both teaching and learning experiences, providing instant feedback and integrating seamlessly with Learning Management Systems (LMS).
 
 ## **Features**
 
-- **AI-Generated Quiz Questions**: Automatically generates quiz questions across a range of subjects and difficulty levels.
+- **AI-Generated Learning Resources**: Automatically generates resources and questions across a range of subjects and difficulty levels.
 - **Instant Evaluation**: Provides immediate feedback on quizzes, including detailed explanations for each question.
 - **LMS Integration**: Easily integrates with Learning Management Systems to manage and deliver quizzes effectively.
 
@@ -23,12 +22,15 @@
 
 ## **Setup Instructions**
 
-To set up the development environment for **Quiz.ai**, follow these instructions:
+To set up the development environment for **ALX - Learning Bot**, follow these instructions:
 
 ### **Backend Setup**
+- make sure you have Python3 `>=3.9` and Redis `>=4` installed
+- `cd server` then run: `pip install -r requirements.txt` to install dependencies
+- to start the development server run: `fastapi dev web/app.py`
 
-1. **Install Dependencies**:
-   ```bash
-   cd server
-   pip install -r requirements.txt
 
+### **Frontend Setup**
+- make sure you have Nodejs `>=v18` installed
+- `cd client` then run: `npm install` to install dependencies
+- to start the development server run: `npm run dev`
