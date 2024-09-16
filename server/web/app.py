@@ -1,42 +1,42 @@
-import aioredis
 import json
+import redis.asyncio as redis
 from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Optional
 from difflib import SequenceMatcher
-import get_json_ai as AI
-from get_movie_ai import get_movies_list
+from ai_generate import content_gen as AI
 from get_movies_db import get_movies_list as movies_from_db
 from generate_quiz import generate_quiz_ai
 app = FastAPI()
 
+app.add_middleware(CORSMiddleware, allow_origins=['*'])
+
 # Redis Configuration
-redis = aioredis.from_url("redis://localhost")
+redis_client = redis.Redis(host='localhost', port=6379)
 
 EXPIRY_TIME = 10800  # 3 hours in seconds
 
+
 # Helper function to calculate LCS similarity
-
-
 def lcs_similarity(query1: str, query2: str) -> float:
 	return SequenceMatcher(None, query1, query2).ratio()
 
+
 # Cache storage and retrieval logic with key namespace
-
-
 async def cache_response(query: str, content: Dict, namespace: str):
 	key = f"{namespace}_{query}"
-	await redis.setex(key, EXPIRY_TIME, json.dumps(content))
+	await redis_client.setex(key, EXPIRY_TIME, json.dumps(content))
 
 
 async def get_cached_response(query: str, namespace: str) -> Optional[Dict]:
 	# Fetch all keys in the given namespace
-	keys = await redis.keys(f"{namespace}_*")
+	keys = await redis_client.keys(f"{namespace}_*")
 
 	for key in keys:
 		stored_query = key.decode("utf-8").replace(f"{namespace}_", "")
 		# Check if LCS similarity is high enough (e.g., > 0.8 threshold)
 		if lcs_similarity(query, stored_query) > 0.8:
-			cached_content = await redis.get(key)
+			cached_content = await redis_client.get(key)
 			if cached_content:
 				return json.loads(cached_content)
 	return None
@@ -44,7 +44,8 @@ async def get_cached_response(query: str, namespace: str) -> Optional[Dict]:
 
 @app.get('/api/v1/get_ai_content')
 async def get_ai_content(query: str, response: Response) -> Dict:
-	""" Get AI-generated content, cache it, and use Redis for session management """
+	""" Get AI-generated content, cache it,
+	and use Redis for session management """
 
 	# Use 'ai_query_' namespace for AI-generated content
 	namespace = "ai_query"
@@ -55,7 +56,7 @@ async def get_ai_content(query: str, response: Response) -> Dict:
 		return cached_response
 
 	# If no cached response, generate new content from AI
-	ai_content = AI.get_ai_json(query)
+	ai_content = AI.generate_content(query)
 
 	if ai_content and len(ai_content) > 3:
 		# Cache the new query and response for 3 hours

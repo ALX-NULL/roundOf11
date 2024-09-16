@@ -14,15 +14,15 @@ def __format_prompt__(user_request: str) -> str:
     """
 
     prompt = f"""
-	Provide me a list of movies related to the topic "{user_request}".
-	Please include and follow the structure of the following details for each movie:\
+    Provide me a list of movies related to the topic "{user_request}".
+    Please include and follow the structure of the following details for each movie:\
 
-	Title: The title of the movie.
+    Title: The title of the movie.
 
-	only the Title should be in the format: "Title:".
-	only movies not documentaries.
-	maximum 5 movies.
-	"""
+    only the Title should be in the format: "Title:".
+    only movies not documentaries.
+    maximum 5 movies.
+    """
     return prompt
 
 
@@ -44,7 +44,7 @@ def generate_movies(user_request: str) -> str:
     # Generate the content
     try:
         response = model.generate_content(prompt)
-    except Exception as e:
+    except Exception:
         response = "Not allwoed to generate content for this request."
     # Output the generated content
     return response.text

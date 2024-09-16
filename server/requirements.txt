@@ -2,4 +2,3 @@ google-generativeai
 requests
 fastapi[standard]
 redis
-aioredis
