@@ -12,7 +12,6 @@ An AI powered platform designed to automatically generate and assess quizzes, st
 ### **Backend**
 
 - **FastAPI**: A high-performance web framework for building APIs with Python. It supports asynchronous programming and offers interactive documentation.
-- **MongoDB**: A NoSQL database that stores quiz data and results efficiently with flexible schema designs.
 - **Generative AI**: Utilizes advanced AI technologies to generate relevant quiz questions based on input topics and content.
 
 ### **Frontend**
