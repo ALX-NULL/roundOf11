@@ -53,7 +53,7 @@ async def get_cached_response(query: str, namespace: str) -> Optional[Dict]:
 @app.get('/api/v1/get_ai_content')
 async def get_ai_content(query: str, response: Response) -> Dict:
     """ Get AI-generated content, cache it,
-	and use Redis for session management """
+    and use Redis for session management """
 
     # Use 'ai_query_' namespace for AI-generated content
     namespace = "ai_query"
@@ -71,7 +71,7 @@ async def get_ai_content(query: str, response: Response) -> Dict:
         await cache_response(query, ai_content, namespace)
         return ai_content
     else:
-        return HTTPException(status_code=404, detail="No content found for the given query.")
+        return {}
 
 
 @app.get('/api/v1/get_movies')
