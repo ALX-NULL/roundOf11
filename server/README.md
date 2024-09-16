@@ -35,3 +35,6 @@ fastapi dev web/app.py
 #### movies
 1. head to "http://127.0.0.1:8000/api/v1/get_movies?query=<query>"
 2. Replace <query> with the movie you want to find
+#### Quiz
+1. head to "http://127.0.0.1:8000/api/v1/quiz?topic=<your_topic>&learning_objectives=<learning_obj>"
+2. Replace <your_topic> with topic you want and <learning_obj> with objectives you want
