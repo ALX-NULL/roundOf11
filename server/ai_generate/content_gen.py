@@ -3,6 +3,7 @@
 
 import os
 import google.generativeai as gemini
+import json
 
 
 class ContentGen:
@@ -48,7 +49,10 @@ class ContentGen:
         except Exception:
             response = "Sorry, Cannot generate conteent for this request."
             self.content = response
-        self.content = response.text
+        text = response.text
+        lines = text.splitlines()
+        lines = lines[1:-1]
+        self.content = '\n'.join(lines)
 
     def convert_json(self):
         """Get AI generated content in JSON format."""
@@ -78,13 +82,36 @@ class ContentGen:
                 "learning_objectives": self.content[indexes["learning_objectives"]:]
                 }
 
+    def convert_to_json(self):
+        # Convert flags to a list of strings by splitting on commas
+        self.data["flags"] = self.data["flags"].replace("Flags: ", "").split(", ")
+
+        # Split resources into a list of dictionaries
+        resource_lines = self.data["resources"].split("\n")[1:]  # Skip the "Resources" heading
+        resources_list = []
+
+        for line in resource_lines:
+            if line:
+                title, description_url = line.split(": ", 1)
+                description, url = description_url.rsplit(" [", 1)
+                url = url.rstrip("]")  # Remove the closing bracket
+                resources_list.append({
+                    "title": title.strip(),
+                    "description": description.strip(),
+                    "url": url.strip()
+                })
+
+        self.data["resources"] = resources_list
+
+
 
 def generate_content(topic: str) -> dict:
     gen = ContentGen()
     gen.generate_request(topic)
     gen.generate_content()
-    gen.convert_json()
+#    gen.convert_json()
 
-    for key, value in gen.data.items():
-        gen.data[key] = value.replace("#", "").replace("*", "").strip()
-    return gen.data
+#    for key, value in gen.data.items():
+#        gen.data[key] = value.replace("#", "").replace("*", "").strip()
+#    gen.convert_to_json()
+    return gen.content
