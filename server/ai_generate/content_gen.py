@@ -9,11 +9,11 @@ import json
 class ContentGen:
 	""" """
 	rules = [
-		"no plagiarism", "no inappropriate content", "no spam",
-		"correct links to resources",
-		"if any non related content is generated, please ignore it",
-		"if any content is'nt related to user request, please ignore it",
-		"if user request isn't about learning a topic, please ignore it"
+	 "no plagiarism", "no inappropriate content", "no spam",
+	 "correct links to resources",
+	 "if any non related content is generated, please ignore it",
+	 "if any content is'nt related to user request, please ignore it",
+	 "if user request isn't about learning a topic, please ignore it"
 	]
 
 	def __init__(self):
@@ -72,7 +72,11 @@ def generate_content(topic: str) -> dict:
 	gen.generate_content()
 
 	# Convert the content string to a real Python dictionary
-	data = json.loads(gen.content)
+	try:
+		data = json.loads(gen.content)
+	except json.JSONDecodeError as e:
+		return {"error": "404"}
+		
 	return data
 
 
