@@ -1,6 +1,6 @@
 import json
 import redis.asyncio as redis
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Optional
 from difflib import SequenceMatcher
@@ -65,16 +65,13 @@ async def get_ai_content(query: str, response: Response) -> Dict:
 
     # If no cached response, generate new content from AI
     ai_content = AI.generate_content(query)
-	
-    if isinstance(ai_content, dict):
-        print('is dict')
 
     if ai_content and len(ai_content) > 3:
         # Cache the new query and response for 3 hours
         await cache_response(query, ai_content, namespace)
         return ai_content
     else:
-        return {"error": "Content not found in the response."}
+        return HTTPException(status_code=404, detail="No content found for the given query.")
 
 
 @app.get('/api/v1/get_movies')
@@ -100,7 +97,7 @@ async def get_movies(query: str, response: Response) -> Dict:
         await cache_response(query, dict_movies, namespace)
         return dict_movies
     else:
-        return {"error": "No movies found for the given query."}
+        return HTTPException(status_code=404, detail="No content found for the given query.")
 
 
 @app.get('/api/v1/quiz')
