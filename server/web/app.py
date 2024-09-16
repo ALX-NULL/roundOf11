@@ -3,8 +3,7 @@ import redis.asyncio as redis
 from fastapi import FastAPI, Response
 from typing import Dict, Optional
 from difflib import SequenceMatcher
-import get_json_ai as AI
-from get_movie_ai import get_movies_list
+from ai_generate import content_gen as AI
 from get_movies_db import get_movies_list as movies_from_db
 
 app = FastAPI()
@@ -54,7 +53,7 @@ async def get_ai_content(query: str, response: Response) -> Dict:
         return cached_response
 
     # If no cached response, generate new content from AI
-    ai_content = AI.get_ai_json(query)
+    ai_content = AI.generate_content(query)
 
     if ai_content and len(ai_content) > 3:
         # Cache the new query and response for 3 hours
