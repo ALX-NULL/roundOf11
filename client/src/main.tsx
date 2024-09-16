@@ -8,7 +8,7 @@ import NotFoundPage from './NotFoundPage.tsx';
 
 const router = createBrowserRouter([
   {path: '/', element: <HomePage />, errorElement: <NotFoundPage />},
-  {path: '/topic', element: <TopicPage />, loader: loader}
+  {path: '/topic', element: <TopicPage />, loader: loader, errorElement: <NotFoundPage />}
 ]);
 
 createRoot(document.getElementById('root')!).render(

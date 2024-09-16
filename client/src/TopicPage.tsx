@@ -20,12 +20,7 @@ interface Topic {
 
 export const loader: LoaderFunction = async function loader(o) {
   const q = new URLSearchParams(o.request.url.split('?')[1]).get("q");
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), 200000);
-  const res = await fetch(`http://localhost:8000/api/v1/get_ai_content?query=${q}`, {
-    signal: controller.signal
-  });
-  clearTimeout(id);
+  const res = await fetch(`http://localhost:8000/api/v1/get_ai_content?query=${q}`);
   if (res.status == 200) return await res.json() as Topic;
   else return await loader(o);
 }
@@ -45,6 +40,9 @@ export default function TopicPage() {
       <ul>{topic.resources?.map((o) => <a href={o.url} key={o.title} className="dark:text-cyan-300 text-red-700 font-semibold"><li>{o.title}</li></a>)}</ul>
       <h2>Learning Objectives</h2>
       <p>{topic.learning_objectives?.map((o) => <li key={o}>{o}</li>)}</p>
+      <div className="flex my-8">
+      <button className="bg-red-500 dark:bg-cyan-200 dark:text-gray-800 mx-auto py-2 px-4 rounded-xl text-xl font-semibold">Check your knowledge</button>
+      </div>
     </article>
   );
 }
