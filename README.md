@@ -1,6 +1,8 @@
 # ALX Learning Bot
 An AI powered platform designed to automatically generate and assess quizzes, streamlining the process of creating and evaluating assessments. The platform offers advanced features to enhance both teaching and learning experiences, providing instant feedback and integrating seamlessly with Learning Management Systems (LMS).
 
+[Demo](https://github.com/user-attachments/assets/fb355bbb-96ed-4781-93a4-13231633b3bf)
+
 ## **Features**
 
 - **AI-Generated Learning Resources**: Automatically generates resources and questions across a range of subjects and difficulty levels.
