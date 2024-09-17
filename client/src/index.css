@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+  .text-invert {
+    @apply text-gray-100 dark:text-gray-800;
+  }
+  .gradient-primary {
+    @apply bg-gradient-to-bl from-red-600 dark:from-teal-700 to-rose-400 dark:to-teal-200;
+  }
+  .gradient-secondary {
+    @apply bg-gradient-to-tr from-red-600 dark:from-teal-700 to-rose-400 dark:to-teal-200;
+  }
+  .text-primary {
+     @apply text-red-500 dark:text-teal-400;
+  }
+}
