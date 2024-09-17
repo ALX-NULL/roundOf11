@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import TaskList from "./TaskList";
 
 interface Topic {
   title: string;
@@ -24,6 +25,7 @@ export default function TopicPage() {
       <ul>{topic.resources?.map((o) => <a href={o.url} key={o.title} className="dark:text-cyan-300 text-red-600 font-semibold"><li>{o.title}</li></a>)}</ul>
       <h2>Learning Objectives</h2>
       <p>{topic.learning_objectives?.map((o) => <li key={o}>{o}</li>)}</p>
+      <TaskList />
     </article>
   );
 }

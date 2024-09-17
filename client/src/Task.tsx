@@ -12,7 +12,7 @@ export default function Task(task: TaskT) {
     <h4 className="">{task.question}</h4>
     <ul className="flex flex-col gap-2 w-[max]">
     {Object.entries(task.choices).map(([key, val]) =>
-        <label key={key} className="has-[:checked]:font-bold has-[:checked]:border-cyan-500 dark:border-gray-700 rounded-full w-full min-w-32 px-4 cursor-pointer border bg-gray-50 dark:bg-slate-800">
+        <label key={key} className="leading-5 py-2 has-[:checked]:font-bold has-[:checked]:border-cyan-500 dark:border-gray-700 rounded-full w-full min-w-32 px-4 cursor-pointer border bg-gray-50 dark:bg-slate-800">
         <input className="hidden" type="radio" name={task.id} value={key} />
         {val}
         </label>)

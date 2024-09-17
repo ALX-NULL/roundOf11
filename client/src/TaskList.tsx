@@ -21,12 +21,14 @@ export default function TaskList() {
       <hr />
       <h2>Quizzes</h2>
       <div className="flex flex-col gap-4">
-      {Object.entries(tasks).map(([key, task]) => <Task key={key} {...task} />)}
+      {Object.entries(tasks).map(([key, task]) => <Task key={key} {...task} id={key} />)}
       </div>
-      <SpinnerButton type="submit" spin={spining} spinLabel="Looking into them..." >
+      <div className="text-center">
+      <SpinnerButton spin={spining} type="submit" spinLabel="Looking into them..." >
       Check your answers
       </SpinnerButton>
-      </ form>
+      </div>
+      </form>
     :
       <SpinnerButton spin={spining} onClick={updateTasks} spinLabel="Getting some questions...">
       Check your knowledge
