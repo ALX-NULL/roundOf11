@@ -11,6 +11,7 @@ The frontend is built using React and TailwindCSS, providing a dynamic and respo
 Before you begin, ensure you have the following installed:
 
 - **Node.js**: Version 18 or higher. You can check your version by running:
-  
+
   ```bash
   node -v
+  ```

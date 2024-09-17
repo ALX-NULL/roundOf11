@@ -1,8 +1,5 @@
-
 function App() {
-  return (
-      <h2 className="text-8xl text-center">Hello ALX</h2>
-  )
+  return <h2 className="text-center text-8xl">Hello ALX</h2>;
 }
 
-export default App
+export default App;
