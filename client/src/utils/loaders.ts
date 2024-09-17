@@ -9,9 +9,9 @@ export const getTopicDetails: LoaderFunction = async ({ request }) => {
   else return {};
 };
 
-export async function getTasks(objectives: string[]) {
+export async function getTasks() {
   const q = new URLSearchParams(window.location.search).get("q");
-  const res = await fetch(`${API_BASE_URL}/get_ai_content?query=${q}&learing_objectives:${objectives}`);
+  const res = await fetch(`${API_BASE_URL}/quiz?topic=${q}&learning_objectives=understanding`);
   if (res.status == 200) return await res.json();
   else return {};
 };
