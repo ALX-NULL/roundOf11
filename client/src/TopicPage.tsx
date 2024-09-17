@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
 import TaskList from "./TaskList";
 
 interface Topic {
@@ -12,6 +13,7 @@ interface Topic {
 export default function TopicPage() {
   const topic = useLoaderData() as Topic;
 
+  if (!topic.title) return <NotFoundPage />;
   return (
     <article className="mx-auto prose dark:prose-invert px-4 py-8">
       <h1 className="">{topic.title}</h1>
