@@ -15,7 +15,8 @@ def __format_prompt__(user_request: str) -> str:
 
     prompt = f"""
     Provide me a list of movies related to the topic "{user_request}".
-    Please include and follow the structure of the following details for each movie:\
+    Please include and follow the\
+         structure of the following details for each movie:\
 
     Title: The title of the movie.
 

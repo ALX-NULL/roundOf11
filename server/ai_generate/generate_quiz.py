@@ -22,48 +22,50 @@ class QuizGenerator:
         gen_ai.configure(api_key=api_key)
         self.ai = gen_ai.GenerativeModel(
             model_name="gemini-1.5-flash",
-            system_instruction=(
-                "You are a quiz generator. Generate only multiple-choice questions (MCQ) "
-                "with exactly 4 answer options. Each question should follow this structure: "
-                "Question1: <question text> "
-                "Choices1: "
-                "A: <option A> "
-                "B: <option B> "
-                "C: <option C> "
-                "D: <option D> "
-                "Answer1: <correct option>. "
-                "Repeat this format for each question."
-            )
-        )
+            system_instruction=("You are a quiz generator.\
+                     Generate only multiple-choice questions (MCQ) "
+                                "with exactly 4 answer options.\
+                 Each question should follow this structure: "
+                                "Question1: <question text> "
+                                "Choices1: "
+                                "A: <option A> "
+                                "B: <option B> "
+                                "C: <option C> "
+                                "D: <option D> "
+                                "Answer1: <correct option>. "
+                                "Repeat this format for each question."))
 
-    def generate_quiz(self, topic: str, learning_objectives: str,
+    def generate_quiz(self,
+                      topic: str,
+                      learning_objectives: str,
                       num_questions: int = 5):
         """
         Generate a quiz based on the provided topic and learning objectives.
 
         Args:
-                topic (str): The subject of the quiz (e.g., "Python Programming").
-                learning_objectives (list): A list of learning objectives for the quiz.
-                num_questions (int): The number of questions in the quiz (default is 5).
+            topic (str)
+            learning_objectives (list)
+            num_questions (int)
 
         Returns:
-                str: The generated quiz as a string.
+            str: The generated quiz as a string.
         """
 
         # Construct the user-level prompt with specific instructions
-        prompt = (
-            f"Generate a {num_questions}-question quiz about the topic '{topic}'. "
-            f"The questions should assess the following learning objectives: {', '.join(learning_objectives)}. "
-            "All questions must follow this structure: "
-            "Question1: <question text> "
-            "Choices1: "
-            "A: <option A> "
-            "B: <option B> "
-            "C: <option C> "
-            "D: <option D> "
-            "Answer1: <correct option>. "
-            "Each question should have only one correct answer."
-        )
+        prompt = (f"Generate a {num_questions}-question\
+                 quiz about the topic '{topic}'. "
+                  f"The questions should assess\
+                 the following learning objectives:\
+                     {', '.join(learning_objectives)}. "
+                  "All questions must follow this structure: "
+                  "Question1: <question text> "
+                  "Choices1: "
+                  "A: <option A> "
+                  "B: <option B> "
+                  "C: <option C> "
+                  "D: <option D> "
+                  "Answer1: <correct option>. "
+                  "Each question should have only one correct answer.")
 
         # Send the prompt to the AI and get the response
         response = self.ai.generate_content(prompt)
@@ -108,16 +110,18 @@ def clean_data(quiz: str) -> Dict:
     return quizzes
 
 
-def generate_quiz_ai(topic: str, learning_objectives: str,
+def generate_quiz_ai(topic: str,
+                     learning_objectives: str,
                      num_questions: int = 5) -> Dict:
-    """ Generate a quiz based on the provided topic and learning objectives. """
+    """ Generate a quiz based on
+         the provided topic and learning objectives. """
 
     # Initialize the QuizGenerator
     quiz_generator = QuizGenerator()
 
     # Generate the quiz
-    quiz = quiz_generator.generate_quiz(
-        topic, learning_objectives, num_questions)
+    quiz = quiz_generator.generate_quiz(topic, learning_objectives,
+                                        num_questions)
 
     # Clean the quiz data
     quizzes = clean_data(quiz)
