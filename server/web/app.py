@@ -4,9 +4,9 @@ from fastapi import FastAPI, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Optional
 from difflib import SequenceMatcher
-from ai_generate import content_gen as AI
+from ai_generate import generate_content as AI
+from ai_generate import generate_quiz as AI_quiz
 from get_movies_db import get_movies_list as movies_from_db
-from generate_quiz import generate_quiz_ai
 app = FastAPI()
 
 origins = ["*"]
@@ -104,7 +104,7 @@ async def get_movies(query: str, response: Response) -> Dict:
 def generate_quiz(topic: str, learning_objectives: str) -> Dict:
     """Generate a quiz based on the provided topic and learning objectives."""
     # Use the AI model to generate a quiz
-    quiz_generator = generate_quiz_ai(topic,
-        learning_objectives,
-        num_questions=5)
+    quiz_generator = AI_quiz.generate_quiz_ai(topic,
+                                              learning_objectives,
+                                              num_questions=5)
     return quiz_generator
