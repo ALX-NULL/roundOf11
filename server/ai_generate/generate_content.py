@@ -9,21 +9,21 @@ import json
 class ContentGen:
     """Generate class used to generate content based on a user request."""
     rules = [
-            "not empty",
-            "clear",
-            "related to a learning topic",
-            "no random words or characters",
-            "no offensive language",
-            "no hate speech",
-            "no personal attacks",
-            "no harassment",
-            "no threats",
-            "no violence",
-            "no discrimination",
-            "no spam",
-            "no plagiarism",
-            "no inappropriate request",
-            ]
+        "not empty",
+        "clear",
+        "related to a learning topic",
+        "no random words or characters",
+        "no offensive language",
+        "no hate speech",
+        "no personal attacks",
+        "no harassment",
+        "no threats",
+        "no violence",
+        "no discrimination",
+        "no spam",
+        "no plagiarism",
+        "no inappropriate request",
+    ]
 
     def __init__(self):
         """Initialize methond for new instance of the ContentGen class."""

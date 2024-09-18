@@ -97,7 +97,8 @@ async def get_movies(query: str, response: Response) -> Dict:
         await cache_response(query, dict_movies, namespace)
         return dict_movies
     else:
-        return HTTPException(status_code=404, detail="No content found for the given query.")
+        return HTTPException(
+            status_code=404, detail="No content found for the given query.")
 
 
 @app.get('/api/v1/quiz')

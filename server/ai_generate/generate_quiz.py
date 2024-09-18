@@ -6,6 +6,7 @@ import google.generativeai as gen_ai
 import os
 from typing import Dict
 
+
 class QuizGenerator:
     """ QuizGenerator class to generate a quiz """
 
@@ -35,7 +36,8 @@ class QuizGenerator:
             )
         )
 
-    def generate_quiz(self, topic: str, learning_objectives: str, num_questions: int = 5):
+    def generate_quiz(self, topic: str, learning_objectives: str,
+                      num_questions: int = 5):
         """
         Generate a quiz based on the provided topic and learning objectives.
 
@@ -75,7 +77,8 @@ def clean_data(quiz: str) -> Dict:
     quizzes = {}
     quiz_parts = quiz.split("Question")
 
-    for i in range(1, len(quiz_parts)):  # Skip index 0 since it’s before "Question1"
+    for i in range(1, len(quiz_parts)
+                   ):  # Skip index 0 since it’s before "Question1"
         question_part = quiz_parts[i].strip().replace("*", " ")
 
         # Extract question text
@@ -105,7 +108,8 @@ def clean_data(quiz: str) -> Dict:
     return quizzes
 
 
-def generate_quiz_ai(topic: str, learning_objectives: str, num_questions: int = 5) -> Dict:
+def generate_quiz_ai(topic: str, learning_objectives: str,
+                     num_questions: int = 5) -> Dict:
     """ Generate a quiz based on the provided topic and learning objectives. """
 
     # Initialize the QuizGenerator
