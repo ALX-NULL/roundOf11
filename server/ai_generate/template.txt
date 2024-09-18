@@ -1,14 +1,12 @@
-1. Title: Provide the main topic derived from the user's request.
-
-2. Flags: Specify what the topic is about (e.g., backend, frontend, database, devops, etc.).
-Include multiple flags if applicable.
-3. Introduction: Write an easy and simple introduction to the topic that covers its basics.
+-Title: Provide the main topic derived from the user's request.
+-Flags: Specify what the topic is about (e.g., backend, frontend, database, devops, etc.). Include multiple flags if applicable.
+-Introduction: Write an easy and simple introduction to the topic that covers its basics.
 about 5 to 15 lines.
-4. Resources: Provide a list up to 7 of good learning resources (articles, videos, etc.) for the topic.
+-Resources: Provide a list up to 7 of good learning resources (articles, videos, etc.) for the topic.
 format: (Resource Name, Description,Link)
 Include a variety (e.g., two articles, some videos).
 
-5. Learning Objectives: Provide 5-10 bullet points outlining what the user is going to learn from studying this topic.
+-Learning Objectives: Provide 5-10 bullet points outlining what the user is going to learn from studying this topic.
 
 keys should be on format: "Title", "Flags", "Introduction", "Resources", "Learning Objectives".
 

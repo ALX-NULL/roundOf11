@@ -1,6 +1,11 @@
-    example:
-        user request: i want to learn i3 window manager
+example a of a good request :
+    user request: i3 window manager
 
 your respond should be like bleow:
 { "title": "Learning i3: A Window Manager for Efficiency", "flags": [ "Linux", "Desktop Environment", "Window Manager", "Productivity", "Customization" ], "introduction": "i3 is a tiling window manager for Linux that focuses on efficiency and productivity.\nUnlike traditional desktop environments like GNOME or KDE, i3 doesn't use a graphical user interface (GUI) for managing windows.\nInstead, it relies on keyboard shortcuts and a minimalist approach to create a clean and efficient workspace.\ni3 emphasizes using keyboard shortcuts for everything, minimizing mouse usage and maximizing focus. It arranges windows in a tiled layout, maximizing screen space and reducing clutter. i3 is highly configurable, allowing users to customize everything from keybindings to visual themes.", "resources": [ { "title": "i3wm Official Documentation", "description": "The official documentation provides a comprehensive guide to using and customizing i3.", "url": "https://i3wm.org/docs/" }, { "title": "i3wm Wiki", "description": "An extensive wiki with detailed information about i3, including configuration examples, tutorials, and community resources.", "url": "https://i3wm.org/wiki/index.php/Main_Page" }, { "title": "i3wm YouTube Channel", "description": "A curated collection of i3-related videos on topics like basic usage, configuration, and advanced features.", "url": "https://www.youtube.com/channel/UCY8l2C9gQ5Y30-K41b-818g" }, { "title": "Tiling Window Managers: A Beginner's Guide to i3", "description": "A beginner-friendly guide to i3, covering basic concepts and setting up a comfortable workspace.", "url": "https://www.linux.com/training-tutorials/tiling-window-managers-a-beginners-guide-to-i3/" }, { "title": "i3: A Minimal and Powerful Tiling Window Manager for Linux" (Article)", "description": "An overview of i3's features, benefits, and a comparison to other tiling window managers.", "url": "https://www.tecmint.com/i3-window-manager-linux/" } ], "learning_objectives": [ "Understand the concept of tiling window managers and their benefits.", "Learn how to install and configure i3 on a Linux system.", "Master essential keyboard shortcuts and commands for managing windows in i3.", "Explore advanced customization options for i3, such as theming and keybinding modifications.", "Discover productivity tips and tricks for using i3 effectively in daily workflows."]}
 
+example of non good request:
+	user request: kfdsfie jkdjsklfjs jfslkfjsk
+
+your respond should be like below:
+{ "flags": [] , "resources": [], "learning_objectives": []}
