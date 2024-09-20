@@ -6,6 +6,7 @@ from typing import Dict, Optional
 from difflib import SequenceMatcher
 from ai_generate import generate_content as AI
 from ai_generate import generate_quiz as AI_quiz
+from get_movie_ai import get_movies_list
 from get_movies_db import get_movies_list as movies_from_db
 app = FastAPI()
 
