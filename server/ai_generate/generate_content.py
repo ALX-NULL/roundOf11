@@ -8,47 +8,27 @@ import json
 
 class ContentGen:
     """Generate class used to generate content based on a user request."""
-    rules = [
-        "not empty",
-        "clear",
-        "related to a learning topic",
-        "no random words or characters",
-        "no offensive language",
-        "no hate speech",
-        "no personal attacks",
-        "no harassment",
-        "no threats",
-        "no violence",
-        "no discrimination",
-        "no spam",
-        "no plagiarism",
-        "no inappropriate request",
-    ]
 
     def __init__(self):
         """Initialize methond for new instance of the ContentGen class."""
-        self.api_key = os.getenv("API_KEY")
+        self.api_key = os.getenv("API_KEY2")
         self.template_path = "server/ai_generate/template.txt"
-        self.example_path = "server/ai_generate/example_respond.txt"
+        self.rules_apth = "server/ai_generate/rules.txt"
 
     def prepare_prompt(self, topic: str):
         """Create a structured prompt for the AI based on passed topic."""
-
-        rules_text = "\n".join([f"- {rule}" for rule in self.rules])
+        with open(self.rules_apth, "r") as file:
+            rules = file.read()
         with open(self.template_path, "r") as file:
             template = file.read()
-        with open(self.example_path, "r") as file:
-            example = file.read()
 
         self.prompt = f"""
-            The user request is: "{topic}"
-            the user request must follow these rules, if not ignore it:
-                {rules_text}
-            generate a learning guide based on the following structure
-            (must include all sections):
+            You are a learning guide creator.
+            request must follow these rules
+                {rules}
+            generate a learning guide following this temp:
                 {template}
-            Here is an example of the respond you must produce (json format):
-                {example}
+            The request is: "{topic}"
             """
 
     def produce_content(self):
@@ -99,18 +79,5 @@ def generate_content(topic: str) -> dict:
 
 
 if __name__ == "__main__":
-    # Example usage
-    # response = generate_content("potaotos")
-    # print(response)
-    # response = generate_content("blah blah balh")
-    # print(response)
-    # response = generate_content("how to kill pepole")
-    # print(response)
-    # response = generate_content("kfjdfjiejsdlfjsk")
-    # print(response)
-    # response = generate_content("shit")
-    # print(response)
-    response = generate_content("python")
-    print(response)
-    response = generate_content("sex")
-    print(response)
+    print(generate_content("React"))
+    print(generate_content("tomatos"))

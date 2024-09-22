@@ -1,5 +1,6 @@
 import json
 import redis.asyncio as redis
+import socket
 from fastapi import FastAPI, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Optional
@@ -20,9 +21,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Redis Configuration
-redis_client = redis.Redis(host='localhost', port=6379)
 
+def check_redis_service(host='localhost', port=6379):
+    try:
+        # Try to connect to the Redis server
+        sock = socket.create_connection((host, port), timeout=2)
+        sock.close()
+        return True
+    except (socket.timeout, ConnectionRefusedError):
+        return False
+
+
+if not check_redis_service():
+    pass
+else:
+    redis_client = redis.Redis(host='localhost', port=6379)
 EXPIRY_TIME = 10800  # 3 hours in seconds
 
 
@@ -33,12 +46,15 @@ def lcs_similarity(query1: str, query2: str) -> float:
 
 # Cache storage and retrieval logic with key namespace
 async def cache_response(query: str, content: Dict, namespace: str):
+    if not check_redis_service():
+        return
     key = f"{namespace}_{query}"
     await redis_client.setex(key, EXPIRY_TIME, json.dumps(content))
 
 
 async def get_cached_response(query: str, namespace: str) -> Optional[Dict]:
-    # Fetch all keys in the given namespace
+    if not check_redis_service():
+        return
     keys = await redis_client.keys(f"{namespace}_*")
 
     for key in keys:
