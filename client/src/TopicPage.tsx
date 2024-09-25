@@ -7,7 +7,7 @@ interface Topic {
   flags: string[];
   introduction: string;
   resources: { title: string; url: string }[];
-  learning_objectives: string[];
+  'learning objectives': string[];
 }
 
 export default function TopicPage() {
@@ -43,7 +43,7 @@ export default function TopicPage() {
         ))}
       </ul>
       <h2>Learning Objectives</h2>
-      <p>{topic.learning_objectives?.map((o) => <li key={o}>{o}</li>)}</p>
+      <p>{topic['learning objectives'].map((o) => <li key={o}>{o}</li>)}</p>
       <TaskList />
     </article>
   );
