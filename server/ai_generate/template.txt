@@ -9,3 +9,8 @@ if the request is following the rules, the response should be like below:
 
 if not, the response should be like below:
 {"message": <a kind message about what is wrong with the request>} 
+
+send the response with user's language preference. (if not specified, send the response in English.)
+for example if the user's request in arabic, the response should be in arabic.
+
+*/
