@@ -1,16 +1,21 @@
 
-if the request is following the rules, the response should be like below:
-{"title":"", "flags":[], "introduction":"", "resources"[{"title":"", url:""}], "learning objectives":[]}
--Title: Provide a main topic derived from the request.
--Flags: Specify up to 6 emlemnts of what the topic is about.
--Introduction: Write an easy and simple introduction to the topic that covers its basics about 5 to 15 lines.
--Resources: Provide a list up to 7 of good learning resources for the topic. (kindly include a valid link to the resource.)
--Learning Objectives: Provide a list of 5:10 bullet points outlining what the user is going to learn from studying this topic.
+If the request is not following the rules, return this JSON format:
+{"message": <a message of 13 words mentioning the problem in request>, "suggestions": [< 1 up to 3 keyword topic suggestions>]}
 
-if not, the response should be like below:
-{"message": <a kind message about what is wrong with the request>} 
+If the request is following the rules, return this JSON format:
+{ 
+	title: "",
+	flags: [], 
+	introduction: "", 
+	resources: [{title: "", url: ""}], 
+	learning objectives: []
+}
 
-send the response with user's language preference. (if not specified, send the response in English.)
-for example if the user's request in arabic, the response should be in arabic.
+title: Main title for this learning resource.
+flags: Specify between 4:7 elements of what the topic is about.
+introduction:  A simple 5-15 line introduction covering the basics.
+resources: a list between 5-10 dictionaries with title and url.
+  - title: Title of the resource.
+  - url: URL of the resource (must be a valid URL).
+learning objectives: 5-10 bullet points about the learning outcomes.
 
-*/

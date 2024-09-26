@@ -1,14 +1,12 @@
 not empty
-related to a learning topic
-clear
+must be clear
+must be related to a learning topic
 no random words or characters
+no spam
 no offensive language
 no hate speech
-no personal attacks
-no harassment
 no threats
 no violence
 no discrimination
-no spam
 no plagiarism
-no inappropriate request
+no sexual content

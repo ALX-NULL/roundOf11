@@ -83,12 +83,10 @@ async def get_ai_content(query: str, response: Response) -> Dict:
     # If no cached response, generate new content from AI
     ai_content = AI.generate_content(query)
 
-    if ai_content and len(ai_content) > 3:
+    if ai_content:
         # Cache the new query and response for 3 hours
         await cache_response(query, ai_content, namespace)
-        return ai_content
-    else:
-        return {}
+    return ai_content
 
 
 @app.get('/api/v1/get_movies')
