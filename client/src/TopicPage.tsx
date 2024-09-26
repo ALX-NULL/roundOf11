@@ -5,15 +5,16 @@ import TaskList from "./TaskList";
 interface Topic {
   title: string;
   flags: string[];
+  suggestions: string[];
   introduction: string;
   resources: { title: string; url: string }[];
-  'learning objectives': string[];
+  "learning objectives": string[];
 }
 
 export default function TopicPage() {
   const topic = useLoaderData() as Topic;
 
-  if (!topic.title) return <NotFoundPage />;
+  if (!topic.title) return <NotFoundPage suggestions={topic.suggestions} />;
   return (
     <article className="prose mx-auto px-4 py-8 dark:prose-invert">
       <h1 className="">{topic.title}</h1>
@@ -43,7 +44,11 @@ export default function TopicPage() {
         ))}
       </ul>
       <h2>Learning Objectives</h2>
-      <p>{topic['learning objectives'].map((o) => <li key={o}>{o}</li>)}</p>
+      <p>
+        {topic["learning objectives"].map((o) => (
+          <li key={o}>{o}</li>
+        ))}
+      </p>
       <TaskList />
     </article>
   );
