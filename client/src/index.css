@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer components {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
   .text-invert {
     @apply text-gray-100 dark:text-gray-800;
   }

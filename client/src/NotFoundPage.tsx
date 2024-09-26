@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
+import LoadingPage from "./LoadingPage";
 
 interface Props {
   suggestions?: string[];
 }
 
 export default function NotFoundPage(p: Props) {
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") {
+    return <LoadingPage />;
+  }
+
   return (
     <section className="mx-auto my-auto h-max">
       <div className="mx-auto max-w-screen-xl p-4 lg:p-6">

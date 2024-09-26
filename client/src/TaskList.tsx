@@ -3,14 +3,18 @@ import SpinnerButton from "./SpinnerButton";
 import Task, { TaskT } from "./Task";
 import { getTasks } from "./utils/loaders";
 
-export default function TaskList() {
+interface Props {
+  learningObjectives?: string[];
+}
+
+export default function TaskList(props: Props) {
   const [tasks, setTasks] = useState<{ [k: string]: TaskT }>({});
   const totalTasks = useMemo(() => Object.keys(tasks).length, [tasks]);
   const [spining, setSpining] = useState(false);
   const [correctAnswers, setAnswers] = useState(0);
   const updateTasks = () => {
     setSpining(true);
-    getTasks().then((data) => {
+    getTasks(props.learningObjectives?.join(", ")).then((data) => {
       setTasks(data);
       setSpining(false);
     });

@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
 import TaskList from "./TaskList";
+import MovieList from "./MovieList";
 
 interface Topic {
   title: string;
@@ -49,7 +50,8 @@ export default function TopicPage() {
           <li key={o}>{o}</li>
         ))}
       </p>
-      <TaskList />
+      <MovieList />
+      <TaskList learningObjectives={topic["learning objectives"]} />
     </article>
   );
 }
